@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+{% block title %}Data{% endblock %} 
+{% block content %}
+{%if access%}
+<form method="POST">
+    <h3 align="left">Enter new item into the inventory</h3>
+    <div class="form-group">
+        <label for="i_name">Item name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="i_name"
+        name="i_name"
+        placeholder="Enter the name of the new Item"
+      />
+      <label for="amount">amount</label>
+      <input
+        type="number"
+        class="form-control"
+        id="amount"
+        name="amount"
+        placeholder="Enter amount"
+      />
+      <label for="SupplierID">SupplierID</label>
+      <input
+        type="number"
+        class="form-control"
+        id="SupplierID"
+        name="SupplierID"
+        placeholder="Enter Supplier ID"
+      />
+      <label for="stock">In Stock:</label>
+      <input
+        type="checkbox"
+        class="form-control"
+        id="stock"
+        name="stock"
+        checked
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add new  item</button>
+</form>
+{%endif%}
+<h1 align="center">Inventory</h1>
+<ul class="list-group list-group-flush" id="orderes">
+  <li class="list-group-item">
+    Item Name
+    |
+    Amount in the inventory
+    |
+    Supplier name
+    |
+    Supplier email
+  </li>
+    {% for invoy in inventory %}
+    <li class="list-group-item">
+      {{ invoy.Inventory.name}}
+      |
+      {{ invoy.Inventory.amount}}
+      |
+      {{ invoy.Supplier.name}}
+      |
+      {{ invoy.Supplier.email}}
+      {%if access%}
+      <button type="button" class="close" onClick="deleteitem({{invoy.Inventory.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {%endif%}
+      
+    </li>
+    {% endfor %}
+  </ul>
+
+  
+
+{% endblock %} 

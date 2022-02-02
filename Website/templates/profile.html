@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+<form method="POST">
+    <h3 align="left">Enter new order</h3>
+    <div class="form-group">
+      <label for="f_name">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="f_name"
+        name="f_name"
+        placeholder={{user.first_name}}
+        value={{user.first_name}}
+      />
+      <label for="l_name">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="l_name"
+        name="l_name"
+        placeholder={{user.last_name}}
+        value={{user.last_name}}
+      />
+      <label for="c_email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="c_email"
+        name="c_email"
+        placeholder={{user.email}}
+        value={{user.email}}
+      />
+      <label for="phone">phone</label>
+      <input
+        type="number"
+        class="form-control"
+        id="phone"
+        name="phone"
+        placeholder={{user.phone}}
+        value={{user.phone}}
+      />
+      <label for="password1">Password(Must)</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password1"
+          name="password1"
+          placeholder="Old Password"
+          />
+      <label for="password2">New Password(if u do not want to change leave blank)</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password2"
+          name="password2"
+          placeholder="New password"
+          value=""
+        />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit changes</button>
+</form>
+
+
+
+  {% endblock %} 

@@ -1,0 +1,109 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+{%if Employee:%}
+<form method="POST">
+    <h3 align="left">Enter new order</h3>
+    <div class="form-group">
+        <label for="c_name">Name of customer</label>
+      <input
+        type="text"
+        class="form-control"
+        id="c_name"
+        name="c_name"
+        placeholder="Enter name"
+      />
+      <label for="c_email">Email of customer</label>
+      <input
+        type="email"
+        class="form-control"
+        id="c_email"
+        name="c_email"
+        placeholder="Enter email"
+      />
+      <label for="device">Decivice</label>
+      <input
+        type="text"
+        class="form-control"
+        id="device"
+        name="device"
+        placeholder="Enter device"
+      />
+      <label for="details">Details:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="details"
+        name="details"
+        placeholder="Enter details..."
+      />
+      <label for="Date">Date:</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        id="date"
+        name="date"
+        placeholder="Enter device"
+      />
+      <label for="e_Date">Expcted Date:</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        id="e_date"
+        name="e_date"
+        placeholder="Enter device"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit order</button>
+</form>
+
+{%endif%}
+
+<h1 align="center">Orders</h1>
+<ul class="list-group list-group-flush" id="orderes">
+  <li class="list-group-item">
+    Device 
+    |
+    Details
+    |
+    Expected data
+    |
+    {%if  not Employee:%}
+    Employee Name
+    |
+    Employee  Email
+    {%else:%}
+    Customer Name
+    |
+    Customer  Email
+    {%endif%}
+  </li>
+    {% for order in orders %}
+    <li class="list-group-item">
+      {{ order.Order.device}}
+      |
+      {{ order.Order.details}}
+      |
+      {{ order.Order.exdate}}
+      |
+      {%if  not Employee:%}
+      {{ order.Employee.first_name}}
+      {{ order.Employee.last_name}}
+      |
+      {{ order.Employee.email}}
+      {%else:%}
+      {{ order.Customer.first_name}}
+      {{ order.Customer.last_name}}
+      |
+      {{ order.Customer.email}}
+      {%endif%}
+      <button type="button" class="close" onClick="deleteOrder({{order.Order.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% endblock %} 

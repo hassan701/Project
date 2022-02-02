@@ -1,0 +1,90 @@
+{% extends "base.html" %} 
+{% block title %}Data{% endblock %} 
+{% block content %}
+{%if access%}
+< <form method="POST">
+  <h3 align="center">Add new Employee</h3>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="Enter first name"
+    />
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lastName"
+      name="lastName"
+      placeholder="Enter last name"
+    />
+    <label for="phoneNumber">Phone Number</label>
+    <input
+      type="number"
+      class="form-control"
+      id="phone"
+      name="phone"
+      placeholder="Enter phone number"
+    />
+    <label for="phoneNumber">Position</label>
+    <input
+      type="text"
+      class="form-control"
+      id="position"
+      name="position"
+      placeholder="Enter Position"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{%endif%}
+<h1 align="center">List of Employee</h1>
+<ul class="list-group list-group-flush" id="orderes">
+  <li class="list-group-item">
+    Emplyee Name
+    |
+    Position
+    |
+    Office
+    |
+    Email
+    |
+    Phone
+  </li>
+    {% for employee in employees %}
+    <li class="list-group-item">
+      {{ employee.Employee.first_name}}
+      {{ employee.Employee.last_name}}
+      |
+      {{ employee.Employee.position}}
+      |
+      {{ employee.Offices.name}}
+      |
+      {{ employee.Employee.email}}
+      |
+      {{ employee.Employee.phone}}
+      {%if access%}
+      <button type="button" class="close" onClick="deleteemployee({{employee.Employee.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {%endif%}
+      
+    </li>
+    {% endfor %}
+  </ul>
+
+  
+
+{% endblock %} 
