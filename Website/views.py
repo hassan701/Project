@@ -44,15 +44,17 @@ def home():
     
     employ = check_employee()
     if employ:
+        i = Employee.query.filter_by(email=current_user.email).first()
         o = db.session.query( Order, Customer, Employee)\
                     .join(Customer, Customer.id == Order.custmerID)\
                     .join(Employee, Employee.id == Order.employeeID)\
-                    .filter( Order.employeeID==current_user.id)
+                    .filter( Order.employeeID==i.id)
     else:
+        i = Customer.query.filter_by(email=current_user.email).first()
         o = db.session.query( Order, Customer, Employee)\
                     .join(Customer, Customer.id == Order.custmerID)\
                     .join(Employee, Employee.id == Order.employeeID)\
-                    .filter( Order.custmerID==current_user.id)
+                    .filter( Order.custmerID==i.id)
 
     return render_template("home.html", user = current_user,Employee=employ, orders=o)
 
